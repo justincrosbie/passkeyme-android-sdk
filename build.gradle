@@ -1,3 +1,4 @@
+
 ext {
     junitVersion = project.hasProperty('junitVersion') ? rootProject.ext.junitVersion : '4.13.2'
     androidxAppCompatVersion = project.hasProperty('androidxAppCompatVersion') ? rootProject.ext.androidxAppCompatVersion : '1.6.1'
@@ -17,6 +18,7 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 android {
     namespace "com.passkeyme"
@@ -57,4 +59,58 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+}
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // Use the artifact from the release build type
+                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+                groupId = 'com.passkeyme'
+                artifactId = 'passkeyme-android-sdk'
+                version = '1.0.1'
+
+                pom {
+                    name = 'PasskeymeSDK'
+                    description = 'Passkeys for everyone!'
+                    url = 'https://github.com/justincrosbie/passkeyme-android-sdk'
+                    licenses {
+                        license {
+                            name = 'The MIT License'
+                            url = 'https://opensource.org/licenses/MIT'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'justincrosbie'
+                            name = 'YJustin Crosbie'
+                            email = 'justincrosbie@gmail.com'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:github.com/justincrosbie/passkeyme-android-sdk.git'
+                        developerConnection = 'scm:git:ssh://github.com/justincrosbie/passkeyme-android-sdk.git'
+                        url = 'https://github.com/justincrosbie/passkeyme-android-sdk'
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                name = 'GitHubPackages'
+                url = uri('https://maven.pkg.github.com/justincrosbie/passkeyme-android-sdk')
+                credentials {
+                    username = findProperty("gpr.user") ?: System.getenv("USERNAME")
+                    password = findProperty("gpr.token") ?: System.getenv("TOKEN")
+                }
+            }
+        }
+    }
+
+    signing {
+        sign publishing.publications.release
+    }
 }

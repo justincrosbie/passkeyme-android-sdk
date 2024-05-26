@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Passkeyme Demo App</string>
-</resources>
+    <string name="title_activity_main">Passkeyme Demo App</string>
+    <string name="package_name">passkeymedemoapp</string>
+    <string name="custom_url_scheme">passkeyme</string>
+    <string name="app_id">90316f5a-c6d2-4d60-841b-76c74881eaf7</string>
+    <string name="api_key">QGXPWRTMLfbP10LmTyYzUlkQPc9tTE53</string>
+
+    <string name="asset_statements">
+        [{
+        \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+        \"target\": {
+        \"namespace\": \"android_app\",
+        \"site\": \"https://passkeyme.com\"
+        }
+        }]
+    </string></resources>

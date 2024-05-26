@@ -19,10 +19,27 @@ android {
             useSupportLibrary = true
         }
     }
+    signingConfigs {
+        create("release") {
+            keyAlias = "justin"
+            keyPassword = "asd123"
+            storeFile = file("/Users/justincrosbie/ionic-passkeys-keystore")
+            storePassword = "asd123"
+        }
+    }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -59,6 +76,16 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation("com.squareup.moshi:moshi:1.12.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+
+
+    implementation("com.passkeyme:passkeyme-android-sdk:1.0.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.credentials:credentials:1.2.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 
 /*
     implementation 'androidx.appcompat:appcompat:1.3.1'

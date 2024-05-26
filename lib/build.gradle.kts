@@ -8,11 +8,23 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+    `maven-publish`
+    signing
 }
 
+group = "com.passkeyme"
+version = "1.0.0"
+
 repositories {
-    // Use Maven Central for resolving dependencies.
+    google()
     mavenCentral()
+}
+
+subprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 dependencies {

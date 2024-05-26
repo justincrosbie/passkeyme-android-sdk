@@ -98,7 +98,7 @@ public class PasskeymeSDK {
         void onError(String error);
     }
 
-    public void registerPasskey(String requestJson, Callback callback) {
+    public void passkeyRegister(String requestJson, Callback callback) {
         Gson gson = new Gson();
         RegChallenge challenge;
 
@@ -158,7 +158,7 @@ public class PasskeymeSDK {
         );
     }
 
-    public boolean authenticatePasskey(String requestJson, Callback callback) {
+    public boolean passkeyAuthenticate(String requestJson, Callback callback) {
         Gson gson = new Gson();
         AuthChallenge challenge;
 
