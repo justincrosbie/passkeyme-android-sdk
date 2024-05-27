@@ -121,7 +121,7 @@ API_KEY=
 ```
 
 You'll need to run it behind an addressible domain for Passkeys to work. You can host it, or use ngrok to serve it.
-You'll need to follow the istructions at https://passkeyme.com/docs/docs/SDKs/android-sdk
+You'll need to follow the instructions at https://passkeyme.com/docs/docs/SDKs/android-sdk
 
 ```
 package com.passkeyme.passkeymedemoapp
