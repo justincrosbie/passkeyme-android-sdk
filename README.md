@@ -167,9 +167,11 @@ data class CompleteResponse(
 
 class MainActivity : Activity() {
 
-    // Add these values to your strings.xml
-    val appId = getString(R.string.APP_ID);
-    val apiKey = getString(R.string.API_KEY);
+    val appId = getString(R.string.app_id)
+    val apiKey = getString(R.string.api_key)
+
+    val username = "testuser"
+    val displayName = "Test User"
 
     val mediaType = "application/json; charset=utf-8".toMediaType()
 
@@ -191,7 +193,7 @@ class MainActivity : Activity() {
     private fun startRegistration() {
 
         val jsonAdapter = moshi.adapter(RegStartRequest::class.java)
-        val postData = RegStartRequest("testuser", "Test User")
+        val postData = RegStartRequest(username, displayName)
         val json = jsonAdapter.toJson(postData)
         val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaType())
 
@@ -248,7 +250,7 @@ class MainActivity : Activity() {
 
     private fun completeRegistration(credential: String) {
         val jsonAdapter = moshi.adapter(RegCompleteRequest::class.java)
-        val postData = RegCompleteRequest("testuser", credential)
+        val postData = RegCompleteRequest(username, credential)
         val json = jsonAdapter.toJson(postData)
         val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaType())
 
@@ -285,10 +287,9 @@ class MainActivity : Activity() {
 
     private fun startAuthentication() {
         val jsonAdapter = moshi.adapter(AuthStartRequest::class.java)
-        val postData = AuthStartRequest("testuser")
+        val postData = AuthStartRequest(username)
         val json = jsonAdapter.toJson(postData)
         val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaType())
-
         val request = Request.Builder()
             .url("$backendURL/start_authentication")
             .addHeader("Content-Type", "application/json")

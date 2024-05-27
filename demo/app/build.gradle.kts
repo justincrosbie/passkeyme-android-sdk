@@ -82,7 +82,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
 
 
-    implementation("com.passkeyme:passkeyme-android-sdk:1.0.0")
+    implementation("com.passkeyme:passkeyme-android-sdk:1.0.1")
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("androidx.credentials:credentials:1.2.0")
     implementation("com.google.code.gson:gson:2.10.1")
